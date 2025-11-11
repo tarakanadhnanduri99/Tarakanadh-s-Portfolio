@@ -23,8 +23,16 @@
   --default-color: #272829; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #050d18; /* Color for headings, subheadings and title throughout the website */
   --accent-color: #149ddd; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color-2: #0d6efd; /* Secondary accent color for gradients */
+  --accent-color-3: #6f42c1; /* Tertiary accent color for gradients */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --gradient-1: linear-gradient(135deg, #149ddd 0%, #0d6efd 50%, #6f42c1 100%);
+  --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --shadow-sm: 0 2px 8px rgba(20, 157, 221, 0.1);
+  --shadow-md: 0 4px 16px rgba(20, 157, 221, 0.15);
+  --shadow-lg: 0 8px 32px rgba(20, 157, 221, 0.2);
+  --shadow-xl: 0 16px 48px rgba(20, 157, 221, 0.25);
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -40,8 +48,9 @@
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
-  --background-color: #f4fafd;
+  --background-color: #f8f9fa;
   --surface-color: #ffffff;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 .dark-background {
@@ -161,7 +170,17 @@ h6 {
   margin: 15px auto;
   display: block;
   width: 120px;
-  border: 8px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  border: 4px solid transparent;
+  background: var(--gradient-1);
+  padding: 4px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.header .profile-img img:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-xl);
 }
 
 .header .logo {
@@ -178,7 +197,15 @@ h6 {
   font-size: 24px;
   margin: 0;
   font-weight: 700;
-  color: var(--heading-color);
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.header .logo h1:hover {
+  transform: scale(1.05);
 }
 
 .header .social-links {
@@ -197,12 +224,15 @@ h6 {
   text-align: center;
   width: 40px;
   height: 40px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .header .social-links a:hover {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: var(--gradient-1);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: var(--shadow-md);
 }
 
 @media (min-width: 1200px) {
@@ -428,11 +458,15 @@ h6 {
   right: 15px;
   bottom: -15px;
   z-index: 99999;
-  background-color: var(--accent-color);
-  width: 44px;
-  height: 44px;
+  background: var(--gradient-1);
+  width: 50px;
+  height: 50px;
   border-radius: 50px;
-  transition: all 0.4s;
+  transition: all 0.4s ease;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .scroll-top i {
@@ -442,7 +476,8 @@ h6 {
 }
 
 .scroll-top:hover {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: var(--shadow-xl);
   color: var(--contrast-color);
 }
 
@@ -528,11 +563,13 @@ section,
   content: "";
   position: absolute;
   display: block;
-  width: 50px;
-  height: 3px;
-  background: var(--accent-color);
+  width: 60px;
+  height: 4px;
+  background: var(--gradient-1);
   left: 0;
   bottom: 0;
+  border-radius: 2px;
+  box-shadow: var(--shadow-sm);
 }
 
 .section-title p {
@@ -579,16 +616,40 @@ section,
   margin: 0;
   font-size: 64px;
   font-weight: 700;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 20px rgba(20, 157, 221, 0.3);
+  animation: fadeInUp 1s ease-out;
 }
 
 .hero p {
-  margin: 5px 0 0 0;
+  margin: 15px 0 0 0;
   font-size: 26px;
+  color: var(--contrast-color);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1s ease-out 0.2s both;
 }
 
 .hero p span {
   letter-spacing: 1px;
-  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 5px;
+  border-bottom: 3px solid;
+  border-image: var(--gradient-1) 1;
+  font-weight: 600;
+  display: inline-block;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero .social-links {
@@ -623,7 +684,12 @@ section,
 --------------------------------------------------------------*/
 .about .content h2 {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 28px;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
 }
 
 .about .content ul {
@@ -635,6 +701,14 @@ section,
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.about .content ul li:hover {
+  background: rgba(20, 157, 221, 0.05);
+  transform: translateX(5px);
 }
 
 .about .content ul strong {
@@ -643,9 +717,27 @@ section,
 
 .about .content ul i {
   font-size: 16px;
-  margin-right: 5px;
-  color: var(--accent-color);
+  margin-right: 8px;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 0;
+  font-weight: 600;
+}
+
+.about .content .col-lg-4 img {
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  background: var(--gradient-1);
+  padding: 3px;
+}
+
+.about .content .col-lg-4 img:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-xl);
 }
 
 /*--------------------------------------------------------------
@@ -715,7 +807,9 @@ section,
   width: 1px;
   height: 10px;
   transition: 0.9s;
-  background-color: var(--accent-color);
+  background: var(--gradient-1);
+  border-radius: 5px;
+  box-shadow: var(--shadow-sm);
 }
 
 /*--------------------------------------------------------------
@@ -732,8 +826,15 @@ section,
 .resume .resume-item {
   padding: 0 0 20px 20px;
   margin-top: -2px;
-  border-left: 2px solid var(--accent-color);
+  border-left: 3px solid;
+  border-image: var(--gradient-1) 1;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.resume .resume-item:hover {
+  transform: translateX(5px);
+  padding-left: 25px;
 }
 
 .resume .resume-item h4 {
@@ -768,13 +869,20 @@ section,
 .resume .resume-item::before {
   content: "";
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50px;
-  left: -9px;
+  left: -10px;
   top: 0;
-  background: var(--background-color);
-  border: 2px solid var(--accent-color);
+  background: var(--gradient-1);
+  border: 3px solid var(--background-color);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.resume .resume-item:hover::before {
+  transform: scale(1.2);
+  box-shadow: var(--shadow-md);
 }
 
 /*--------------------------------------------------------------
@@ -803,6 +911,11 @@ section,
 .portfolio .portfolio-filters li:hover,
 .portfolio .portfolio-filters li.filter-active {
   color: var(--accent-color);
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
 }
 
 .portfolio .portfolio-filters li:first-child {
@@ -823,10 +936,20 @@ section,
 .portfolio .portfolio-content {
   position: relative;
   overflow: hidden;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  background: var(--surface-color);
+}
+
+.portfolio .portfolio-content:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
 }
 
 .portfolio .portfolio-content img {
   transition: 0.3s;
+  border-radius: 12px;
 }
 
 .portfolio .portfolio-content .portfolio-info {
@@ -835,17 +958,25 @@ section,
   inset: 0;
   z-index: 3;
   transition: all ease-in-out 0.3s;
-  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(135deg, rgba(20, 157, 221, 0.9) 0%, rgba(13, 110, 253, 0.9) 50%, rgba(111, 66, 193, 0.9) 100%);
   padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .portfolio .portfolio-content .portfolio-info h4 {
   font-size: 14px;
-  padding: 5px 10px;
-  font-weight: 400;
+  padding: 8px 16px;
+  font-weight: 600;
   color: #ffffff;
   display: inline-block;
-  background-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
 }
 
 .portfolio .portfolio-content .portfolio-info p {
@@ -895,33 +1026,53 @@ section,
 --------------------------------------------------------------*/
 .services .service-item {
   position: relative;
+  padding: 30px;
+  background: var(--surface-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.services .service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-color);
+  background: linear-gradient(135deg, var(--surface-color) 0%, rgba(20, 157, 221, 0.05) 100%);
 }
 
 .services .service-item .icon {
-  background: var(--accent-color);
+  background: var(--gradient-1);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 54px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  transition: 0.5s;
-  border: 1px solid var(--accent-color);
+  transition: all 0.5s ease;
+  border: 2px solid transparent;
   margin-right: 20px;
+  box-shadow: var(--shadow-md);
 }
 
 .services .service-item .icon i {
   color: var(--contrast-color);
-  font-size: 24px;
+  font-size: 26px;
   line-height: 0;
 }
 
 .services .service-item:hover .icon {
   background: var(--surface-color);
+  border-color: var(--accent-color);
+  transform: rotate(360deg) scale(1.1);
+  box-shadow: var(--shadow-lg);
 }
 
 .services .service-item:hover .icon i {
-  color: var(--accent-color);
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .services .service-item .title {
@@ -1130,15 +1281,24 @@ section,
 
 .contact .php-email-form button[type=submit] {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: var(--gradient-1);
   border: 0;
-  padding: 10px 30px;
-  transition: 0.4s;
+  padding: 12px 40px;
+  transition: all 0.4s ease;
   border-radius: 50px;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 25%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.contact .php-email-form button[type=submit]:active {
+  transform: translateY(0);
 }
 
 /*--------------------------------------------------------------
@@ -1270,6 +1430,4 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
-}
+/* Starter section styles can be added here if needed */
