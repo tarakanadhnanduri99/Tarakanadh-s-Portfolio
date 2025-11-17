@@ -29,3 +29,6 @@ dist-ssr
 .env.production.local
 .env.development.local
 
+# Old portfolio folder (not needed in React version)
+Tarakanadh-s-Portfolio-main/
+
